@@ -28,6 +28,9 @@ Health Data Science MS
 
 
 ### Projects that are not data related!
+More to come...
+
+[Modeling of Qian qiu ting in Blender](blender_project.png).
 
 
 
