@@ -11,7 +11,7 @@ Health Data Science MS
 
 [SCAD regularization and variable selection with Pytorch / Simulation with ElasticNet, SqrtLasso, and SCAD](hw3.md).
 
-[Classifying Mushrooms](data440final_jingli.html).
+[Classifying Mushrooms using RF, CatBoost, XGBoost, Ann](data440final_jingli.html).
 
 
 
