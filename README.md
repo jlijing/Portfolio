@@ -1,7 +1,7 @@
 # Jing Li
-Data Science student with a concentration in Spatial Analytics.
+Health Data Science MS 
 
-Interested in biostatistics and health care machine learning.
+
 
 ## Project Portfolio
 
@@ -11,7 +11,12 @@ Interested in biostatistics and health care machine learning.
 
 [SCAD regularization and variable selection with Pytorch / Simulation with ElasticNet, SqrtLasso, and SCAD](hw3.md).
 
+
 ### Spatial Analysis:
+
+
+
+### Projects that are not data related!
 
 
 
