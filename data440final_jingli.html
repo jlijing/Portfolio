@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>data440final_jingli</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h1 id="classification-of-edible-mushrooms">Classification of Edible Mushrooms</h1>
+<h2 id="abstract">Abstract</h2>
+<p>Mushrooms present both an opportunity for culinary use and a risk of toxicity, making the accurate classification between edible and poisonous types critical. This study utilizes a dataset containing 8124 entries, each categorized into 22 categorical features (UCI machine learning repository), to detect patterns that help distinguish between poisonous and edible mushrooms. Four machine learning models were explored–Random Forest, CatBoost, XGBoost, and Artificial Neural Networks to test their effectiveness in binary classification tasks. Each model was selected for its capacity to handle categorical data and its robustness in classification scenarios. Remarkably, all models achieved perfect accuracy, demonstrating their potential for reliable mushroom classification in real world applications. This project provides a practical guide for mycologists to assess mushroom safety with high confidence. The results suggest that the models could be implemented as influential decision support systems in mycology research.</p>
+<h2 id="introduction">Introduction</h2>
+<p>To determine the toxicity of mushrooms, various approaches can be considered based on existing literature. One method involves categorizing toxic mushrooms into distinct groups based on key clinical features, such as cytotoxic, neurotoxic, myotoxic, metabolic, gastrointestinal irritant, and miscellaneous adverse reaction poisonings (Yin et al., 2019).</p>
+<p>The use of deep learning models, such as convolutional neural networks, has shown promise in automatically classifying mushroom species to differentiate between edible and poisonous varieties, thereby aiding in preventing incidents of food poisoning (Wang, 2022; Ketwongsa et al., 2022). These advanced technological approaches can enhance the accuracy and efficiency of mushroom classification.</p>
+<p>The primary objective of this research is to evaluate and compare the effectiveness of various machine learning classification algorithms in the accurate binary classification of mushrooms as either poisonous or edible. The goal extends to exploring the feature importance derived from hypothesis testing, thereby providing insights into which characteristics most significantly impact mushroom edibility.</p>
+<h2 id="exploratory-data-analysis">Exploratory Data Analysis</h2>
+<p>Response variable “Class” has binary entries indicating Edible (0) or Poisonous (1), with the rest of the 22 features as predictors.</p>
+<p>Figure 1 highlights the identifying characteristics of a mushroom.</p>
+
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Class</td>
+<td>Edible or poisonous</td>
+</tr>
+<tr>
+<td>Cap shape</td>
+<td>Bell, conical, convex, flat, knobbed, sunken</td>
+</tr>
+<tr>
+<td>Cap surface</td>
+<td>Fibrous, grooves, scaly, smooth</td>
+</tr>
+<tr>
+<td>Cap color</td>
+<td>Brown, buff, cinnamon, gray, green, pink, purple, red, white, yellow</td>
+</tr>
+<tr>
+<td>Bruises</td>
+<td>Bruises/No bruises</td>
+</tr>
+<tr>
+<td>Odor</td>
+<td>Almond, anise, creosote, fishy, foul, musty, none, pungent, spicy</td>
+</tr>
+<tr>
+<td>Gill attachment</td>
+<td>Attached, descending, free, notched</td>
+</tr>
+<tr>
+<td>Gill spacing</td>
+<td>Close, crowded, distant</td>
+</tr>
+<tr>
+<td>Gill size</td>
+<td>Broad, narrow</td>
+</tr>
+<tr>
+<td>Gill color</td>
+<td>Black, brown, buff, chocolate, gray, green, orange, pink, purple, red, white, yellow</td>
+</tr>
+<tr>
+<td>Stalk shape</td>
+<td>Enlarging, tapering</td>
+</tr>
+<tr>
+<td>Stalk root</td>
+<td>Bulbous, club, cup, equal, rhizomorphs, rooted, missing</td>
+</tr>
+<tr>
+<td>Stalk surface above ring</td>
+<td>Fibrous, scaly, silky, smooth</td>
+</tr>
+<tr>
+<td>Stalk surface below ring</td>
+<td>Fibrous, scaly, silky, smooth</td>
+</tr>
+<tr>
+<td>Stalk color above ring</td>
+<td>Brown, buff, cinnamon, gray, green, pink, purple, red, white, yellow</td>
+</tr>
+<tr>
+<td>Stalk color below ring</td>
+<td>Brown, buff, cinnamon, gray, green, pink, purple, red, white, yellow</td>
+</tr>
+<tr>
+<td>Veil type</td>
+<td>Partial, universal</td>
+</tr>
+<tr>
+<td>Veil color</td>
+<td>Brown, orange, white, yellow</td>
+</tr>
+<tr>
+<td>Ring number</td>
+<td>None, one, two</td>
+</tr>
+<tr>
+<td>Ring type</td>
+<td>Cobwebby, evanescent, flaring, large, none, pendant, sheathing, zone</td>
+</tr>
+<tr>
+<td>Spore print color</td>
+<td>Black, brown, buff, chocolate, green, orange, purple, white, yellow</td>
+</tr>
+<tr>
+<td>Population</td>
+<td>Abundance, clustered, numerous, scattered, several, solitary</td>
+</tr>
+<tr>
+<td>Habitat</td>
+<td>Grasses, leaves, meadows, paths, urban, waste, woods</td>
+</tr>
+</tbody>
+</table><p>Figure 1<br>
+<img src="https://live.staticflickr.com/65535/53710725110_05853b40c1_w.jpg"></p>
+<h1 id="pre-processing">Pre-processing</h1>
+<p>Considering the categorial features that has no inherent order in this dataset, label encoder will be applied to translate categorical text data into numerical format. It will target labels with value between 0 and n_classes-1.</p>
+<h2 id="feature-selection">Feature Selection</h2>
+<p>With 22 predictor variables, feature selection was utilized to identify and select the most relevant features. The presence of numerous features can introduce redundant components within the data, rendering some features unusable. Not all physical characteristics contribute equally to determining whether a mushroom is edible or poisonous. A chi-squared test will be performed to retain those characteristics that have a more significant impact on the classification outcome.</p>
+<h3 id="chi-square-test">Chi-Square Test</h3>
+<p>The Chi-Square test is a statistical method used to explore the independence of two categorical variables, it is primarily used to test whether the occurrence of a specific feature and the outcome are independent of each other.</p>
+<p><img src="https://live.staticflickr.com/65535/53710341841_704f7ca64c_n.jpg"></p>
+<h5 id="hypothesis">Hypothesis:</h5>
+<p>H0: Two variables are independent<br>
+H1: Two variables are not independent</p>
+<p>In feature selection, the goal is to select the features that are highly dependent on the response. Given two independent variables, the observed count is close to the expected count, outputting a lower Chi-Square value. Therefore, a high Chi-Squared value indicates a feature to be more dependent on the response and it can be selected for training.</p>
+<p>If Chi-Square statistic is greater than the critical value, H0 is rejected. It can be concluded that there is a statistically significant association between a selected physical attribute of a mushroom and its edibility.</p>
+<p>The figure below highlights the result after implementing chi2 and SelectKBest from sklearn.feature_selection library.</p>
+<p>Figure 2<br>
+<img src="https://live.staticflickr.com/65535/53710283831_3b47c7cf89_z.jpg"></p>
+<p>Spore print color of a mushroom seems to have the strongest association with classifying mushrooms as poisonous or not given its high Chi-Squared value. It is not surprising that it is a reliable indicator as it reflects the color of the mushroom spores when they are released, providing a direct link to the mushroom’s reproductive structures that is unique to each species of mushroom (Gawlikowski et al., 2014).</p>
+<p>Followed by ring type, gill characteristics and stalk color.</p>
+<p>Top 11 features were selected as displayed below with its label encoding, to reduce the variables by half.</p>
+
+<table>
+<thead>
+<tr>
+<th>Category</th>
+<th>Encoded</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cap shape</td>
+<td>0, 1, 2, 3, 4, 5</td>
+</tr>
+<tr>
+<td>Cap surface</td>
+<td>0, 1, 2, 3</td>
+</tr>
+<tr>
+<td>Bruises</td>
+<td>0, 1</td>
+</tr>
+<tr>
+<td>Gill spacing</td>
+<td>0, 1, 2</td>
+</tr>
+<tr>
+<td>Gill size</td>
+<td>0, 1</td>
+</tr>
+<tr>
+<td>Gill color</td>
+<td>0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11</td>
+</tr>
+<tr>
+<td>Stalk color above ring</td>
+<td>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</td>
+</tr>
+<tr>
+<td>Stalk color below ring</td>
+<td>0, 1, 2, 3, 4, 5, 6, 7, 8, 9</td>
+</tr>
+<tr>
+<td>Ring type</td>
+<td>0, 1, 2, 3, 4, 5, 6, 7</td>
+</tr>
+<tr>
+<td>Spore print color</td>
+<td>0, 1, 2, 3, 4, 5, 6, 7, 8</td>
+</tr>
+<tr>
+<td>Population</td>
+<td>0, 1, 2, 3, 4, 5</td>
+</tr>
+</tbody>
+</table><h1 id="classification-methods">Classification Methods</h1>
+<h2 id="random-forest">Random Forest</h2>
+<p>An ensemble learning method that operates by constructing a multitude of decision trees at training time and outputting the class that is the mode of the classes of the individual trees.</p>
+<p><img src="https://live.staticflickr.com/65535/53710641718_f455e75cda_z.jpg"></p>
+<p>Random forest builds upon the concept of a decision tree, to construct a forest of trees. It leverages the diversity of many such decision trees to make a reliable prediction about whether a mushroom is edible or poisonous. Each tree might capture different aspects of the data based on the random subset of features and data selected.</p>
+<p>Example of a decision tree:</p>
+<p><img src="https://live.staticflickr.com/65535/53710777624_b8a250644b_n.jpg"></p>
+<h2 id="catboost">CatBoost</h2>
+<p>An algorithm that can handle categorical values with minimal preprocessing. It provides binary classification with multi-level categorical features by applying gradient boosting techniques to decision trees.</p>
+<h4 id="main-features-of-catboost">Main features of CatBoost</h4>
+<ol>
+<li>Ordered boosting: the model is prevented from overfitting by using different permutations of the dataset to create multiple training instances. Each instance in the dataset is predicted based on the trees built without it or using the data before it in the permutation, so it eliminates prediction shift.</li>
+<li>Targeting encoding: categories are replaced with a combination of the posterior probability of the target given the categorical value and the prior probability of the target over all the data. Reduces overfitting.</li>
+</ol>
+<p><img src="https://live.staticflickr.com/65535/53710912555_982444f9e0_n.jpg"></p>
+<p>Model training (loss function and learning rate).</p>
+<p>Tree structure (symmetrical trees with same number of splits).</p>
+<p>Feature combination (automatically generates new features by combining different categorical variables.</p>
+<h2 id="xgboost">XGBoost</h2>
+<p>Extreme gradient boosting classification is based on boosted decision trees. It has built in regularization to avoid overfitting.</p>
+<h4 id="main-features-of-xgboost">Main features of XGBoost</h4>
+<ol>
+<li>Gradient boosting: new trees are created to correct the errors made by existing trees, by modeling residual errors with each new tree.</li>
+<li>Regularization: incorporates L1 and L2 into the loss function t control overfitting.</li>
+<li>Tree pruning: stops splitting a node is the split does not provide a positive gain, uses max depth parameter to stop the growth of trees as it reach a specific depth.</li>
+</ol>
+<p><img src="https://live.staticflickr.com/65535/53710811254_c297faab03_z.jpg"></p>
+<p>Algorithm initializes with a single base predictor.</p>
+<p>Iteratively adds new trees, build on the residuals of previous trees.</p>
+<p>After each round, the model is updated using optimization algorithm to minimize the objective function with the learning rate scaling the contributions of each new tree.</p>
+<p>Continues until specified number of trees are added.</p>
+<h2 id="artificial-neural-network-ann">Artificial Neural Network (ANN)</h2>
+<p>Consists of layers of interconnected nodes, where each connection represents a weight that is adjusted during learning.</p>
+<ol>
+<li>Input layer: each input feature is represented by one node, no computation in this layer.</li>
+<li>Hidden layers: the intermediate layer, processes the input from the input layer using weighted sums followed by a non-linear activation function.</li>
+<li>Output layer: for classification, sigmoid function is utilized for binary classification.</li>
+</ol>
+<p><img src="https://live.staticflickr.com/65535/53710481176_c783b0d237_z.jpg"></p>
+<h4 id="learning-process">Learning process</h4>
+<p>Forward propagation: where data is passed through the network from the input to the output layer. At each node, the input is multiplied by the node’s weight, summed, and passed through activation function.</p>
+<p>Loss calculation: the difference between the predicted output and the actual target value is determined using a loss function.</p>
+<p>Backpropagation: where the network learns by updating weights. Error is calculated in the loss function and sent back through the network. From output layer through the hidden layers to the input layers, gradient of the loss function with respect to each weight is computed.</p>
+<p>Weight: weights are updated to minimize the loss using an optimization algorithm and uses the learning rate to determine the size of steps to take during optimization.</p>
+<h2 id="implementation--results">Implementation / Results</h2>
+<p>After selecting the significant features through the Chi-Squared test, the data is split into train and test and all four classifiers are evaluated.</p>
+<h3 id="random-forest-1">Random Forest</h3>
+<p><img src="https://live.staticflickr.com/65535/53710724933_3c56910b3e_z.jpg"></p>
+<h3 id="catboost-1">CatBoost</h3>
+<p><img src="https://live.staticflickr.com/65535/53709601387_d442edb0d7.jpg"></p>
+<h3 id="xgboost-1">XGBoost</h3>
+<p><img src="https://live.staticflickr.com/65535/53710847754_9a6bf23c3a_w.jpg"></p>
+<h3 id="ann">ANN</h3>
+<p><img src="https://live.staticflickr.com/65535/53710946440_421bef8ea1_z.jpg"><br>
+<img src="https://live.staticflickr.com/65535/53710946435_15200606a5_b.jpg"></p>
+<p>All four models had perfect / nearly perfect results. Tuning was not necessary, using the models default parameters gave the best results.</p>
+<h1 id="discussion--inferences">Discussion / Inferences</h1>
+<p>The achievement of perfect accuracy with models such as Random Forest, CatBoost, XGBoost, and ANN in predicting mushroom edibility is remarkable but also unusual in real world scenarios. Although this does indicate that the models are well tuned (default parameters) and the features selected are highly predictive, there are a few aspects to consider for a deeper understanding and future research.</p>
+<p>Perfect accuracy can bring about some concerns on overfitting, especially when discussing complex models like neural networks. Additional validation techniques such as cross validation or external validation with a different mushroom dataset could verify the precision of the models.</p>
+<p>The results are heavily dependent on the quality and representativeness of the data. If certain mushrooms are underrepresented, the model may not perform as well under different conditions or different geographical areas. Expanding the dataset to include a wider range of mushroom types could strengthen the prediction results.</p>
+<p>Explore different methods for encoding categorical data, given that label encoding can introduce a notion of order that might not exist. Testing the model against a more varied dataset or introducing noise to evaluate stability can provide insight into how these models might preform in less controlled environments.</p>
+<h1 id="references">References</h1>
+<ol>
+<li>Mushroom. (1987). UCI Machine Learning Repository. <a href="https://doi.org/10.24432/C5959T">https://doi.org/10.24432/C5959T</a>.</li>
+<li>Yin, X., Yang, A., &amp; Gao, J. (2019). Mushroom toxins: chemistry and toxicology. Journal of Agricultural and Food Chemistry, 67(18), 5053-5071. <a href="https://doi.org/10.1021/acs.jafc.9b00414">https://doi.org/10.1021/acs.jafc.9b00414</a></li>
+<li>Wang, B. (2022). Automatic mushroom species classification model for foodborne disease prevention based on vision transformer. Journal of Food Quality, 2022, 1-11. <a href="https://doi.org/10.1155/2022/1173102">https://doi.org/10.1155/2022/1173102</a></li>
+<li>Ketwongsa, Wacharaphol &amp; Boonlue, Sophon &amp; Kokaew, Urachart. (2022). A New Deep Learning Model for The Classification of Poisonous and Edible Mushrooms Based on Improved AlexNet Convolutional Neural Network. Applied Sciences. 12. 3409. 10.3390/app12073409.</li>
+</ol>
+</div>
+</body>
+
+</html>
