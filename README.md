@@ -13,6 +13,7 @@ Health Data Science MS
 
 [Classifying Mushrooms using RF, CatBoost, XGBoost, Ann](data440final_jingli.html).
 
+[Test](hw4_jingli-3.ipynb)
 
 
 ### Spatial Analysis:
