@@ -13,7 +13,11 @@ Health Data Science MS
 
 [Classifying Mushrooms using RF, CatBoost, XGBoost, Ann](data440final_jingli.html).
 
-[Test](hw4_jingli-3.ipynb)
+[Grid Search Algorithm with Particle Swarm Optimizer and AlexNet](hw4_jingli-3-2.md)
+
+[Analysis of Microbiome](final.pdf)
+
+[Liver Allocation with Operations Research](final_poster.pdf)
 
 
 ### Spatial Analysis:
