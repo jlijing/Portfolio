@@ -7,12 +7,11 @@ Health Data Science Master's student passionate about data science and health eq
 
 ### Applied Data Science Deliverables:
 
+[Liver Allocation with Operations Research](final_poster.pdf)
+
 [Classifying Mushrooms using RF, CatBoost, XGBoost, Ann](data440final_jingli.html)
 
 [Analysis of Microbiome](final.pdf)
-
-[Liver Allocation with Operations Research](final_poster.pdf)
-
 
 ### Spatial Analysis Deliverables:
 
