@@ -1,5 +1,5 @@
 # Jing Li
-Health Data Science MS 
+Health Data Science Master's student passionate about data science and health equity!
 
 
 
