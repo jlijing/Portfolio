@@ -12,7 +12,7 @@
 
 [Analysis of Microbiome](final.pdf)
 
-[Excess of Mortality in Hurricane Maria](final-project.pdf)
+[Excess of Mortality in Hurricane Maria in R](final-project.pdf)
 
 
 
