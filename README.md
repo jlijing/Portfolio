@@ -12,6 +12,10 @@
 
 [Analysis of Microbiome](final.pdf)
 
+[Excess of Mortality in Hurricane Maria](final-project.pdf)
+
+
+
 ### Spatial Analysis Deliverables:
 
 [GIS Portfolio](https://storymaps.arcgis.com/stories/8708a59ed7474d14a8a014ba9102ad7f)
