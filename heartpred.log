@@ -1,0 +1,54 @@
+proc import datafile = "P:\heart.csv"
+	out=heart_data
+	dbms=csv
+	replace;
+	guessingrows=MAX;
+run;
+
+proc contents data=heart_data;
+run;
+
+proc means data=heart_data n mean std min max;
+run;
+
+proc freq data=heart_data;
+	tables Sex chestPainType HeartDisease;
+run;
+
+proc univariate data = heart_data;
+	var Age RestingBP Cholesterol;
+	histogram Age;
+run;
+
+proc sgplot data = heart_data;
+	histogram age;
+	density age;
+run;
+
+proc sgplot data=heart_data;
+	scatter x=age y=cholesterol / group=sex;
+	reg x=age y=cholesterol;
+run;
+
+
+proc sgplot data=heart_data;
+    vbox Cholesterol / category=HeartDisease;
+run;
+
+
+proc reg data=heart_data;
+    model Cholesterol = Age;
+run;
+
+proc reg data=heart_data;
+    model Cholesterol = Age RestingBP;
+run;
+
+proc logistic data=heart_data descending;
+    class Sex ChestPainType / param=ref;
+    model HeartDisease = Age Sex RestingBP Cholesterol ChestPainType;
+run;
+
+proc glmselect data=heart_data;
+    model HeartDisease = Age RestingBP Cholesterol / selection=stepwise;
+run;
