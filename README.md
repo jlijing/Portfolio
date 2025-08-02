@@ -15,6 +15,7 @@
 [Excess of Mortality in Hurricane Maria in R](final-project.pdf)
 
 ### SAS
+[Heart Disease Prediction SAS log](heartpred.log)
 
 [Heart Disease Prediction Output](SAS_heartdata_output.pdf)
 
