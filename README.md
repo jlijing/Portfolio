@@ -14,6 +14,10 @@
 
 [Excess of Mortality in Hurricane Maria in R](final-project.pdf)
 
+### R Shiny
+
+[Cirrhosis ML Dashboard](https://jingli-ds.shinyapps.io/cirrhosis-ml/)
+
 ### SAS
 [Heart Disease Prediction SAS log](heartpred.log)
 
