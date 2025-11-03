@@ -6,6 +6,10 @@
 
 ### Applied Data Science Deliverables:
 
+[Bone Fracture App: functional locally, deployment to streamlit cloud in progress]
+- [Classifier](bone_app_overview1.png)
+- [GradCam](bone_app_overview2.png)
+
 [Liver Allocation with Operations Research](final_poster.pdf)
 
 [Classifying Mushrooms using RF, CatBoost, XGBoost, Ann](data440final_jingli.html)
